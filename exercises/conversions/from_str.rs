@@ -46,6 +46,15 @@ enum ParsePersonError {
 impl FromStr for Person {
     type Err = ParsePersonError;
     fn from_str(s: &str) -> Result<Person, Self::Err> {
+        if s.len() == 0 {
+            Err()
+        }
+        let names = s.split(',');
+        if names.len() != 2 {
+            Err()
+        }
+        names[1].parse::<usize>();
+        OK(Person{s.into(), 0})
     }
 }
 
